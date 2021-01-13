@@ -1,48 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_todo/model/todo_list.dart';
+import 'package:flutter_todo/redux/app_state.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('TODO'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      body: StoreConnector<AppState, List<TodoList>>(
+          converter: (store) => store.state.todoLists,
+          builder: (context, todoLists) {
+            return ListView.separated(
+              itemCount: todoLists.length,
+              itemBuilder: (context, index) {
+                final todoList = todoLists[index];
+                return ListTile(
+                  title: Text(todoList.name),
+                );
+              },
+              separatorBuilder: (context, index) => const Divider(),
+            );
+          }),
     );
   }
 }

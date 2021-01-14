@@ -1,26 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_todo/presentation/home/home_page.dart';
-import 'package:flutter_todo/redux/app_reducer.dart';
+import 'package:flutter_todo/home/home_page.dart';
 import 'package:flutter_todo/redux/app_state.dart';
-import "package:redux/redux.dart";
+import 'package:redux/redux.dart';
 
-class TodoApp extends StatefulWidget {
-  @override
-  _TodoAppState createState() => _TodoAppState();
-}
+class TodoApp extends StatelessWidget {
+  final Store<AppState> _store;
 
-class _TodoAppState extends State<TodoApp> {
-  Store<AppState> _store;
-
-  @override
-  void initState() {
-    super.initState();
-    _store = Store<AppState>(
-      appReducer,
-      initialState: AppState.init(),
-    );
-  }
+  const TodoApp(this._store);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,7 @@
-class CreateListAction {
-  final String listName;
+import 'package:flutter_todo/model/todo_list.dart';
 
-  CreateListAction(this.listName);
+class AddTodoListAction {
+  final TodoList todoList;
+
+  AddTodoListAction(this.todoList);
 }

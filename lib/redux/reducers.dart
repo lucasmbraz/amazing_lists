@@ -1,12 +1,14 @@
+import 'package:flutter_todo/redux/actions.dart';
+import 'package:redux/redux.dart';
+
 import 'app_state.dart';
 
-final appReducer = (AppState state, dynamic action) => state;
+final appReducer = combineReducers<AppState>([
+  TypedReducer<AppState, AddTodoListAction>(_onAddTodoList),
+]);
 
-// AppState _onCreateTodoList(AppState state, CreateListAction action) {
-//   print("Adding todo list ${action.listName}");
-//   final todoList = TodoList(name: action.listName);
-//   final newLists = List.from(state.todoLists).toList();
-//   newLists.add(todoList);
-//
-//   return state.copyWith(todoLists: newLists);
-// }
+AppState _onAddTodoList(AppState state, AddTodoListAction action) {
+  return state.copyWith(
+    todoLists: List.from(state.todoLists)..add(action.todoList),
+  );
+}

@@ -5,3 +5,9 @@ class AddTodoListAction {
 
   AddTodoListAction(this.todoList);
 }
+
+class DeleteTodoListAction {
+  final TodoList todoList;
+
+  DeleteTodoListAction(this.todoList);
+}

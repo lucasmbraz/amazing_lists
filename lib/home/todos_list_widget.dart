@@ -8,7 +8,10 @@ import 'package:redux/redux.dart';
 class TodosListWidget extends StatelessWidget {
   const TodosListWidget({
     Key key,
+    @required this.onTapCallback,
   }) : super(key: key);
+
+  final OnTapTodoListCallback onTapCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,10 @@ class TodosListWidget extends StatelessWidget {
           return ListView.separated(
             itemCount: vm.todoLists.length,
             separatorBuilder: (context, index) => const Divider(),
-            itemBuilder: (context, index) => TodosListItemWidget(todoList: vm.todoLists[index]),
+            itemBuilder: (context, index) => TodosListItemWidget(
+              todoList: vm.todoLists[index],
+              onTapCallback: onTapCallback,
+            ),
           );
         });
   }

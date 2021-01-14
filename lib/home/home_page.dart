@@ -9,16 +9,20 @@ import 'package:flutter_todo/redux/app_state.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('TODO'),
-      ),
-      body: TodosListWidget(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openAddTodoListDialog(context),
-        child: const Icon(Icons.add),
-      ),
-    );
+    return StoreBuilder<AppState>(builder: (context, store) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('TODO'),
+        ),
+        body: TodosListWidget(
+          onTapCallback: (todoList) => store.dispatch(DeleteTodoListAction(todoList)),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _openAddTodoListDialog(context),
+          child: const Icon(Icons.add),
+        ),
+      );
+    });
   }
 
   _openAddTodoListDialog(BuildContext context) {

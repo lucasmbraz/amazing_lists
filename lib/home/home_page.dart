@@ -5,6 +5,7 @@ import 'package:flutter_todo/home/todos_list_widget.dart';
 import 'package:flutter_todo/model/todo_list.dart';
 import 'package:flutter_todo/redux/actions.dart';
 import 'package:flutter_todo/redux/app_state.dart';
+import 'package:redux/redux.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -18,20 +19,18 @@ class HomePage extends StatelessWidget {
           onTapCallback: (todoList) => store.dispatch(DeleteTodoListAction(todoList)),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => _openAddTodoListDialog(context),
+          onPressed: () => _openAddTodoListDialog(context, store),
           child: const Icon(Icons.add),
         ),
       );
     });
   }
 
-  _openAddTodoListDialog(BuildContext context) {
+  _openAddTodoListDialog(BuildContext context, Store<AppState> store) {
     showDialog(
       context: context,
-      builder: (context) => StoreBuilder<AppState>(
-        builder: (context, store) => AddTodoListDialog(
-          (listName) => store.dispatch(AddTodoListAction(TodoList(name: listName))),
-        ),
+      builder: (context) => AddTodoListDialog(
+        (listName) => store.dispatch(AddTodoListAction(TodoList(name: listName))),
       ),
     );
   }

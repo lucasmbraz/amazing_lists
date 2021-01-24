@@ -11,11 +11,11 @@ abstract class AppState with _$AppState {
 
   factory AppState.init() => AppState(
         todoLists: [
-          TodoList(name: 'List #1'),
-          TodoList(name: 'List #2'),
-          TodoList(name: 'List #3'),
-          TodoList(name: 'List #4'),
-          TodoList(name: 'List #5'),
+          TodoList(id: '1', name: 'List #1'),
+          TodoList(id: '2', name: 'List #2'),
+          TodoList(id: '3', name: 'List #3'),
+          TodoList(id: '4', name: 'List #4'),
+          TodoList(id: '5', name: 'List #5'),
         ],
       );
 }

@@ -6,8 +6,11 @@ import 'package:flutter_todo/model/todo_list.dart';
 import 'package:flutter_todo/redux/actions.dart';
 import 'package:flutter_todo/redux/app_state.dart';
 import 'package:redux/redux.dart';
+import 'package:uuid/uuid.dart';
 
 class HomePage extends StatelessWidget {
+  final uuid = Uuid();
+
   @override
   Widget build(BuildContext context) {
     return StoreBuilder<AppState>(builder: (context, store) {
@@ -30,7 +33,7 @@ class HomePage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AddTodoListDialog(
-        (listName) => store.dispatch(AddTodoListAction(TodoList(name: listName))),
+        (listName) => store.dispatch(AddTodoListAction(TodoList(id: uuid.v4(), name: listName))),
       ),
     );
   }

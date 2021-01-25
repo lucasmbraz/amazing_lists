@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/model/todo.dart';
 
-class TodoWidget extends StatelessWidget {
-  const TodoWidget({
+class TodoItemWidget extends StatelessWidget {
+  const TodoItemWidget({
     Key key,
     @required this.todo,
   }) : super(key: key);

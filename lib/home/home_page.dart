@@ -6,6 +6,7 @@ import 'package:flutter_todo/home/todos_list_widget.dart';
 import 'package:flutter_todo/model/todo_list.dart';
 import 'package:flutter_todo/redux/actions.dart';
 import 'package:flutter_todo/redux/app_state.dart';
+import 'package:flutter_todo/todos/todos_page.dart';
 import 'package:redux/redux.dart';
 import 'package:uuid/uuid.dart';
 
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
-        converter: (store) => _ViewModel.from(store, uuid),
+        converter: (store) => _ViewModel.from(context, store, uuid),
         builder: (context, vm) {
           return Scaffold(
             appBar: AppBar(
@@ -56,9 +57,14 @@ class _ViewModel {
   final OnAddTodoListCallback onAddTodoListCallback;
   final OnTapTodoListCallback onTapTodoListCallback;
 
-  static _ViewModel from(Store<AppState> store, Uuid uuid) => _ViewModel(
+  static _ViewModel from(BuildContext context, Store<AppState> store, Uuid uuid) => _ViewModel(
         store.state.todoLists,
         onAddTodoListCallback: (listName) => store.dispatch(AddTodoListAction(TodoList(id: uuid.v4(), name: listName, todos: []))),
-        onTapTodoListCallback: (todoList) => store.dispatch(DeleteTodoListAction(todoList)),
+        onTapTodoListCallback: (todoList) => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TodoPage(listId: todoList.id),
+          ),
+        ),
       );
 }

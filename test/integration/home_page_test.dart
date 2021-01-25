@@ -5,6 +5,7 @@ import 'package:flutter_todo/home/home_page.dart';
 import 'package:flutter_todo/model/todo_list.dart';
 import 'package:flutter_todo/redux/app_state.dart';
 import 'package:flutter_todo/redux/reducers.dart';
+import 'package:flutter_todo/todos/todos_page.dart';
 import 'package:redux/redux.dart';
 
 main() {
@@ -36,7 +37,7 @@ main() {
       'GIVEN app state has two lists ("Groceries" and "Shopping") '
       'WHEN home page is displayed '
       'AND user taps "Groceries" '
-      'THEN "Groceries" is no longer in the list', (WidgetTester tester) async {
+      'THEN todos page is displayed for "Groceries"', (WidgetTester tester) async {
     final appState = AppState(todoLists: [
       TodoList(id: '1', name: 'Groceries', todos: []),
       TodoList(id: '2', name: 'Shopping', todos: []),
@@ -54,13 +55,43 @@ main() {
         )));
 
     var groceriesFinder = find.text('Groceries');
-    expect(groceriesFinder, findsOneWidget);
 
     await tester.tap(groceriesFinder);
-    await tester.pump();
+    await tester.pumpAndSettle();
 
-    expect(groceriesFinder, findsNothing);
+    expect(find.byType(TodoPage), findsOneWidget);
+    expect(groceriesFinder, findsOneWidget);
   });
+
+  // testWidgets(
+  //     'GIVEN app state has two lists ("Groceries" and "Shopping") '
+  //     'WHEN home page is displayed '
+  //     'AND user taps "Groceries" '
+  //     'THEN "Groceries" is no longer in the list', (WidgetTester tester) async {
+  //   final appState = AppState(todoLists: [
+  //     TodoList(id: '1', name: 'Groceries', todos: []),
+  //     TodoList(id: '2', name: 'Shopping', todos: []),
+  //   ]);
+  //
+  //   final store = Store<AppState>(
+  //     appReducer,
+  //     initialState: appState,
+  //   );
+  //
+  //   await tester.pumpWidget(StoreProvider(
+  //       store: store,
+  //       child: MaterialApp(
+  //         home: HomePage(),
+  //       )));
+  //
+  //   var groceriesFinder = find.text('Groceries');
+  //   expect(groceriesFinder, findsOneWidget);
+  //
+  //   await tester.tap(groceriesFinder);
+  //   await tester.pump();
+  //
+  //   expect(groceriesFinder, findsNothing);
+  // });
 
   testWidgets(
       'GIVEN app state has one list ("Groceries") '

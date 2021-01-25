@@ -14,7 +14,7 @@ void main() {
   TodosListItemWidget widget;
 
   setUp(() {
-    todoList = TodoList(id: '1', name: 'Groceries');
+    todoList = TodoList(id: '1', name: 'Groceries', todos: []);
     callback = MockTapCallback();
     widget = TodosListItemWidget(todoList: todoList, onTapCallback: callback);
   });
@@ -32,6 +32,6 @@ void main() {
 
     await tester.tap(find.text('Groceries'));
 
-    verify(callback.call(TodoList(id: '1', name: 'Groceries')));
+    verify(callback.call(TodoList(id: '1', name: 'Groceries', todos: [])));
   });
 }

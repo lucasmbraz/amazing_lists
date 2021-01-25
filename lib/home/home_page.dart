@@ -58,7 +58,7 @@ class _ViewModel {
 
   static _ViewModel from(Store<AppState> store, Uuid uuid) => _ViewModel(
         store.state.todoLists,
-        onAddTodoListCallback: (listName) => store.dispatch(AddTodoListAction(TodoList(id: uuid.v4(), name: listName))),
+        onAddTodoListCallback: (listName) => store.dispatch(AddTodoListAction(TodoList(id: uuid.v4(), name: listName, todos: []))),
         onTapTodoListCallback: (todoList) => store.dispatch(DeleteTodoListAction(todoList)),
       );
 }

@@ -13,8 +13,8 @@ main() {
       'WHEN home page is displayed '
       'THEN it shows both lists', (WidgetTester tester) async {
     final appState = AppState(todoLists: [
-      TodoList(id: '1', name: 'Groceries'),
-      TodoList(id: '2', name: 'Shopping'),
+      TodoList(id: '1', name: 'Groceries', todos: []),
+      TodoList(id: '2', name: 'Shopping', todos: []),
     ]);
 
     final store = Store<AppState>(
@@ -38,8 +38,8 @@ main() {
       'AND user taps "Groceries" '
       'THEN "Groceries" is no longer in the list', (WidgetTester tester) async {
     final appState = AppState(todoLists: [
-      TodoList(id: '1', name: 'Groceries'),
-      TodoList(id: '2', name: 'Shopping'),
+      TodoList(id: '1', name: 'Groceries', todos: []),
+      TodoList(id: '2', name: 'Shopping', todos: []),
     ]);
 
     final store = Store<AppState>(
@@ -70,7 +70,7 @@ main() {
       'AND user taps "add" '
       'THEN "Shopping" is now in the list', (WidgetTester tester) async {
     final appState = AppState(todoLists: [
-      TodoList(id: '1', name: 'Groceries'),
+      TodoList(id: '1', name: 'Groceries', todos: []),
     ]);
 
     final store = Store<AppState>(

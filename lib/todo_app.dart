@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
+import 'package:amazing_lists/brand.dart';
 import 'package:amazing_lists/home/home_page.dart';
 import 'package:amazing_lists/redux/app_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 class TodoApp extends StatelessWidget {
@@ -14,11 +15,8 @@ class TodoApp extends StatelessWidget {
     return StoreProvider(
       store: _store,
       child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        title: 'Amazing Lists',
+        theme: brandTheme,
         home: HomePage(),
       ),
     );

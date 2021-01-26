@@ -14,7 +14,7 @@ abstract class AppState implements _$AppState {
 
   factory AppState.init() => AppState(
         todoLists: [
-          TodoList(id: '1', name: 'List #1', todos: [Todo(id: '1', name: 'Apples')]),
+          TodoList(id: '1', name: 'List #1', todos: [Todo(id: '1', name: 'Apples'), Todo(id: '2', name: 'Oranges')]),
           TodoList(id: '2', name: 'List #2', todos: []),
           TodoList(id: '3', name: 'List #3', todos: []),
           TodoList(id: '4', name: 'List #4', todos: []),

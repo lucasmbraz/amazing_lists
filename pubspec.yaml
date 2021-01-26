@@ -26,6 +26,9 @@ dependencies:
   # Mockito
   mockito: ^4.1.3
 
+  # Circular checkboxes
+  circular_check_box: ^1.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

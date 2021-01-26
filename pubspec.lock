@@ -113,6 +113,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  circular_check_box:
+    dependency: "direct main"
+    description:
+      name: circular_check_box
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   cli_util:
     dependency: transitive
     description:
@@ -508,3 +515,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0 <2.11.0"
+  flutter: ">=1.20.0 <2.0.0"

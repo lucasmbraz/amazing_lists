@@ -1,4 +1,4 @@
-package com.lucasmbraz.flutter_todo
+package com.lucasmbraz.amazing_lists
 
 import io.flutter.embedding.android.FlutterActivity
 

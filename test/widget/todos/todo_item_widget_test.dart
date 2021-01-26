@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_todo/model/todo.dart';
-import 'package:flutter_todo/todos/todo_item_widget.dart';
+import 'package:amazing_lists/model/todo.dart';
+import 'package:amazing_lists/todos/todo_item_widget.dart';
 
 main() {
   testWidgets(

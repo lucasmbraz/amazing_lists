@@ -1,5 +1,5 @@
-import 'package:flutter_todo/model/todo_list.dart';
-import 'package:flutter_todo/redux/actions.dart';
+import 'package:amazing_lists/model/todo_list.dart';
+import 'package:amazing_lists/redux/actions.dart';
 import 'package:redux/redux.dart';
 
 import 'app_state.dart';

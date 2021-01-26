@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_todo/model/todo_list.dart';
-import 'package:flutter_todo/redux/app_state.dart';
-import 'package:flutter_todo/todos/todos_widget.dart';
+import 'package:amazing_lists/model/todo_list.dart';
+import 'package:amazing_lists/redux/app_state.dart';
+import 'package:amazing_lists/todos/todos_widget.dart';
 import 'package:redux/redux.dart';
 
 class TodoPage extends StatelessWidget {

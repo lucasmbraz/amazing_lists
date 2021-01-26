@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_todo/model/todo.dart';
-import 'package:flutter_todo/model/todo_list.dart';
-import 'package:flutter_todo/redux/actions.dart';
-import 'package:flutter_todo/redux/app_state.dart';
-import 'package:flutter_todo/redux/reducers.dart';
+import 'package:amazing_lists/model/todo.dart';
+import 'package:amazing_lists/model/todo_list.dart';
+import 'package:amazing_lists/redux/actions.dart';
+import 'package:amazing_lists/redux/app_state.dart';
+import 'package:amazing_lists/redux/reducers.dart';
 
 void main() {
   group('Todo List', () {

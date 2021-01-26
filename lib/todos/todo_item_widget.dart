@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/model/todo.dart';
+import 'package:amazing_lists/model/todo.dart';
 
 class TodoItemWidget extends StatelessWidget {
   const TodoItemWidget({

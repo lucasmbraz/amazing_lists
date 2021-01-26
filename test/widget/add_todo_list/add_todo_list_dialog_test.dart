@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_todo/add_todo_list/add_todo_list_dialog.dart';
+import 'package:amazing_lists/add_todo_list/add_todo_list_dialog.dart';
 import 'package:mockito/mockito.dart';
 
 class MockAddCallback extends Mock {

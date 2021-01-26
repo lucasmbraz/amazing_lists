@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_todo/model/todo.dart';
-import 'package:flutter_todo/model/todo_list.dart';
+import 'package:amazing_lists/model/todo.dart';
+import 'package:amazing_lists/model/todo_list.dart';
 
 void main() {
   test(

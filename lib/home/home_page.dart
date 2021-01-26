@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_todo/add_todo_list/add_todo_list_dialog.dart';
-import 'package:flutter_todo/home/todos_list_item_widget.dart';
-import 'package:flutter_todo/home/todos_list_widget.dart';
-import 'package:flutter_todo/model/todo_list.dart';
-import 'package:flutter_todo/redux/actions.dart';
-import 'package:flutter_todo/redux/app_state.dart';
-import 'package:flutter_todo/todos/todos_page.dart';
+import 'package:amazing_lists/add_todo_list/add_todo_list_dialog.dart';
+import 'package:amazing_lists/home/todos_list_item_widget.dart';
+import 'package:amazing_lists/home/todos_list_widget.dart';
+import 'package:amazing_lists/model/todo_list.dart';
+import 'package:amazing_lists/redux/actions.dart';
+import 'package:amazing_lists/redux/app_state.dart';
+import 'package:amazing_lists/todos/todos_page.dart';
 import 'package:redux/redux.dart';
 import 'package:uuid/uuid.dart';
 

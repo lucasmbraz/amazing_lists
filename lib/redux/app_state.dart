@@ -1,5 +1,5 @@
-import 'package:flutter_todo/model/todo.dart';
-import 'package:flutter_todo/model/todo_list.dart';
+import 'package:amazing_lists/model/todo.dart';
+import 'package:amazing_lists/model/todo_list.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_state.freezed.dart';

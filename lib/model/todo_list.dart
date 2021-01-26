@@ -1,4 +1,4 @@
-import 'package:flutter_todo/model/todo.dart';
+import 'package:amazing_lists/model/todo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'todo_list.freezed.dart';

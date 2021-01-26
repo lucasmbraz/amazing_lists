@@ -1,4 +1,4 @@
-# flutter_todo
+# Amazing Lists
 
 A new Flutter application.
 

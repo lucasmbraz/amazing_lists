@@ -6,9 +6,11 @@ class TasksWidget extends StatelessWidget {
   const TasksWidget({
     Key key,
     @required this.tasks,
+    @required this.onTapCallback,
   }) : super(key: key);
 
   final List<Task> tasks;
+  final OnTapTaskCallback onTapCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class TasksWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: TaskItemWidget(
           task: tasks[index],
-          onTapCallback: null,
+          onTapCallback: onTapCallback,
         ),
       ),
     );

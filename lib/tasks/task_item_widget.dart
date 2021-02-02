@@ -6,9 +6,11 @@ class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({
     Key key,
     @required this.task,
+    @required this.onTapCallback,
   }) : super(key: key);
 
   final Task task;
+  final OnTapTaskCallback onTapCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,10 @@ class TaskItemWidget extends StatelessWidget {
           onChanged: (value) {},
         ),
         title: Text(task.name),
+        onTap: () => onTapCallback(task),
       ),
     );
   }
 }
+
+typedef OnTapTaskCallback = Function(Task task);

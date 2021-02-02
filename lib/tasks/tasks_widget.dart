@@ -16,7 +16,10 @@ class TasksWidget extends StatelessWidget {
       itemCount: tasks.length,
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: TaskItemWidget(task: tasks[index]),
+        child: TaskItemWidget(
+          task: tasks[index],
+          onTapCallback: null,
+        ),
       ),
     );
   }

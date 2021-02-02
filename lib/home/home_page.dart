@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:amazing_lists/add_todo_list/add_todo_list_dialog.dart';
 import 'package:amazing_lists/home/todos_list_item_widget.dart';
 import 'package:amazing_lists/home/todos_list_widget.dart';
@@ -7,6 +5,8 @@ import 'package:amazing_lists/model/todo_list.dart';
 import 'package:amazing_lists/redux/actions.dart';
 import 'package:amazing_lists/redux/app_state.dart';
 import 'package:amazing_lists/todos/todos_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:uuid/uuid.dart';
 
@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
             ),
             body: _body(vm),
             floatingActionButton: FloatingActionButton(
+              backgroundColor: Theme.of(context).primaryColor,
               onPressed: () => _openAddTodoListDialog(context, vm),
               child: const Icon(Icons.add),
             ),
@@ -32,9 +33,16 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _body(_ViewModel vm) {
-    return TodosListWidget(
-      todoLists: vm.todoLists,
-      onTapCallback: vm.onTapTodoListCallback,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Card(
+          child: TodosListWidget(
+            todoLists: vm.todoLists,
+            onTapCallback: vm.onTapTodoListCallback,
+          ),
+        ),
+      ),
     );
   }
 

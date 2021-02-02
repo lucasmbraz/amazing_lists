@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:amazing_lists/home/todos_list_item_widget.dart';
 import 'package:amazing_lists/model/todo_list.dart';
+import 'package:flutter/material.dart';
 
 class TodosListWidget extends StatelessWidget {
   const TodosListWidget({

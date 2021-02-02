@@ -1,21 +1,21 @@
-import 'package:amazing_lists/model/todo.dart';
-import 'package:amazing_lists/model/todo_list.dart';
+import 'package:amazing_lists/model/task.dart';
+import 'package:amazing_lists/model/project.dart';
 
-class AddTodoListAction {
-  final TodoList todoList;
+class AddProjectAction {
+  final Project project;
 
-  AddTodoListAction(this.todoList);
+  AddProjectAction(this.project);
 }
 
-class DeleteTodoListAction {
-  final TodoList todoList;
+class DeleteProjectAction {
+  final Project project;
 
-  DeleteTodoListAction(this.todoList);
+  DeleteProjectAction(this.project);
 }
 
-class AddTodoAction {
-  final TodoList todoList;
-  final Todo todo;
+class AddTaskAction {
+  final Project project;
+  final Task task;
 
-  AddTodoAction(this.todoList, this.todo);
+  AddTaskAction(this.project, this.task);
 }

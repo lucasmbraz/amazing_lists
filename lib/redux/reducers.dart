@@ -1,32 +1,31 @@
-import 'package:amazing_lists/model/todo_list.dart';
 import 'package:amazing_lists/redux/actions.dart';
 import 'package:redux/redux.dart';
 
 import 'app_state.dart';
 
 final appReducer = combineReducers<AppState>([
-  TypedReducer<AppState, AddTodoListAction>(_onAddTodoList),
-  TypedReducer<AppState, DeleteTodoListAction>(_onDeleteTodoList),
-  TypedReducer<AppState, AddTodoAction>(_onAddTodo),
+  TypedReducer<AppState, AddProjectAction>(_onAddProject),
+  TypedReducer<AppState, DeleteProjectAction>(_onDeleteProject),
+  TypedReducer<AppState, AddTaskAction>(_onAddTask),
 ]);
 
-AppState _onAddTodoList(AppState state, AddTodoListAction action) => state.copyWith(
-      todoLists: List.from(state.todoLists)..add(action.todoList),
+AppState _onAddProject(AppState state, AddProjectAction action) => state.copyWith(
+      projects: [...state.projects]..add(action.project),
     );
 
-AppState _onDeleteTodoList(AppState state, DeleteTodoListAction action) => state.copyWith(
-      todoLists: List.from(state.todoLists)..remove(action.todoList),
+AppState _onDeleteProject(AppState state, DeleteProjectAction action) => state.copyWith(
+      projects: [...state.projects]..remove(action.project),
     );
 
-AppState _onAddTodo(AppState state, AddTodoAction action) {
-  final todosList = List<TodoList>.from(state.todoLists);
-  final index = todosList.indexOf(action.todoList);
-  todosList.removeAt(index);
+AppState _onAddTask(AppState state, AddTaskAction action) {
+  final projects = [...state.projects];
+  final index = projects.indexOf(action.project);
+  projects.removeAt(index);
 
-  final updatedTodoList = action.todoList.addTodo(action.todo);
-  todosList.insert(index, updatedTodoList);
+  final updatedProject = action.project.addTodo(action.task);
+  projects.insert(index, updatedProject);
 
   return state.copyWith(
-    todoLists: todosList,
+    projects: projects,
   );
 }

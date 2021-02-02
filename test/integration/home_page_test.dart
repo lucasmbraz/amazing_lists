@@ -1,11 +1,11 @@
+import 'package:amazing_lists/home/home_page.dart';
+import 'package:amazing_lists/model/project.dart';
+import 'package:amazing_lists/redux/app_state.dart';
+import 'package:amazing_lists/redux/reducers.dart';
+import 'package:amazing_lists/tasks/tasks_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:amazing_lists/home/home_page.dart';
-import 'package:amazing_lists/model/todo_list.dart';
-import 'package:amazing_lists/redux/app_state.dart';
-import 'package:amazing_lists/redux/reducers.dart';
-import 'package:amazing_lists/todos/todos_page.dart';
 import 'package:redux/redux.dart';
 
 main() {
@@ -13,9 +13,9 @@ main() {
       'GIVEN app state has two lists ("Groceries" and "Shopping") '
       'WHEN home page is displayed '
       'THEN it shows both lists', (WidgetTester tester) async {
-    final appState = AppState(todoLists: [
-      TodoList(id: '1', name: 'Groceries', todos: []),
-      TodoList(id: '2', name: 'Shopping', todos: []),
+    final appState = AppState(projects: [
+      Project(id: '1', name: 'Groceries', tasks: []),
+      Project(id: '2', name: 'Shopping', tasks: []),
     ]);
 
     final store = Store<AppState>(
@@ -38,9 +38,9 @@ main() {
       'WHEN home page is displayed '
       'AND user taps "Groceries" '
       'THEN todos page is displayed for "Groceries"', (WidgetTester tester) async {
-    final appState = AppState(todoLists: [
-      TodoList(id: '1', name: 'Groceries', todos: []),
-      TodoList(id: '2', name: 'Shopping', todos: []),
+    final appState = AppState(projects: [
+      Project(id: '1', name: 'Groceries', tasks: []),
+      Project(id: '2', name: 'Shopping', tasks: []),
     ]);
 
     final store = Store<AppState>(
@@ -59,7 +59,7 @@ main() {
     await tester.tap(groceriesFinder);
     await tester.pumpAndSettle();
 
-    expect(find.byType(TodoPage), findsOneWidget);
+    expect(find.byType(TasksPage), findsOneWidget);
     expect(groceriesFinder, findsOneWidget);
   });
 
@@ -69,8 +69,8 @@ main() {
   //     'AND user taps "Groceries" '
   //     'THEN "Groceries" is no longer in the list', (WidgetTester tester) async {
   //   final appState = AppState(todoLists: [
-  //     TodoList(id: '1', name: 'Groceries', todos: []),
-  //     TodoList(id: '2', name: 'Shopping', todos: []),
+  //     TodoList(id: '1', name: 'Groceries', tasks: []),
+  //     TodoList(id: '2', name: 'Shopping', tasks: []),
   //   ]);
   //
   //   final store = Store<AppState>(
@@ -100,8 +100,8 @@ main() {
       'AND user types in "Shopping" '
       'AND user taps "add" '
       'THEN "Shopping" is now in the list', (WidgetTester tester) async {
-    final appState = AppState(todoLists: [
-      TodoList(id: '1', name: 'Groceries', todos: []),
+    final appState = AppState(projects: [
+      Project(id: '1', name: 'Groceries', tasks: []),
     ]);
 
     final store = Store<AppState>(

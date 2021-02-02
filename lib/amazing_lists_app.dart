@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-class TodoApp extends StatelessWidget {
+class AmazingListsApp extends StatelessWidget {
   final Store<AppState> _store;
 
-  const TodoApp(this._store);
+  const AmazingListsApp(this._store);
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,10 @@
-import 'package:amazing_lists/add_todo_list/add_todo_list_dialog.dart';
-import 'package:amazing_lists/home/todos_list_item_widget.dart';
-import 'package:amazing_lists/home/todos_list_widget.dart';
-import 'package:amazing_lists/model/todo_list.dart';
+import 'package:amazing_lists/add_project/add_project_dialog.dart';
+import 'package:amazing_lists/home/project_item_widget.dart';
+import 'package:amazing_lists/home/projects_widget.dart';
+import 'package:amazing_lists/model/project.dart';
 import 'package:amazing_lists/redux/actions.dart';
 import 'package:amazing_lists/redux/app_state.dart';
-import 'package:amazing_lists/todos/todos_page.dart';
+import 'package:amazing_lists/tasks/tasks_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -37,9 +37,9 @@ class HomePage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Card(
-          child: TodosListWidget(
-            todoLists: vm.todoLists,
-            onTapCallback: vm.onTapTodoListCallback,
+          child: ProjectsWidget(
+            projects: vm.projects,
+            onTapCallback: vm.onTapProjectCallback,
           ),
         ),
       ),
@@ -49,29 +49,29 @@ class HomePage extends StatelessWidget {
   _openAddTodoListDialog(BuildContext context, _ViewModel vm) {
     showDialog(
       context: context,
-      builder: (context) => AddTodoListDialog(vm.onAddTodoListCallback),
+      builder: (context) => AddProjectDialog(vm.onAddProjectCallback),
     );
   }
 }
 
 class _ViewModel {
   _ViewModel(
-    this.todoLists, {
-    @required this.onAddTodoListCallback,
-    @required this.onTapTodoListCallback,
+    this.projects, {
+    @required this.onAddProjectCallback,
+    @required this.onTapProjectCallback,
   });
 
-  final List<TodoList> todoLists;
-  final OnAddTodoListCallback onAddTodoListCallback;
-  final OnTapTodoListCallback onTapTodoListCallback;
+  final List<Project> projects;
+  final OnAddProjectCallback onAddProjectCallback;
+  final OnTapProjectCallback onTapProjectCallback;
 
   static _ViewModel from(BuildContext context, Store<AppState> store, Uuid uuid) => _ViewModel(
-        store.state.todoLists,
-        onAddTodoListCallback: (listName) => store.dispatch(AddTodoListAction(TodoList(id: uuid.v4(), name: listName, todos: []))),
-        onTapTodoListCallback: (todoList) => Navigator.push(
+        store.state.projects,
+        onAddProjectCallback: (projectName) => store.dispatch(AddProjectAction(Project(id: uuid.v4(), name: projectName, tasks: []))),
+        onTapProjectCallback: (project) => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TodoPage(listId: todoList.id),
+            builder: (context) => TasksPage(projectId: project.id),
           ),
         ),
       );

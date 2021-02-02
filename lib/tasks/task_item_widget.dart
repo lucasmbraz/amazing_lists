@@ -1,14 +1,14 @@
-import 'package:amazing_lists/model/todo.dart';
+import 'package:amazing_lists/model/task.dart';
 import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 
-class TodoItemWidget extends StatelessWidget {
-  const TodoItemWidget({
+class TaskItemWidget extends StatelessWidget {
+  const TaskItemWidget({
     Key key,
-    @required this.todo,
+    @required this.task,
   }) : super(key: key);
 
-  final Todo todo;
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class TodoItemWidget extends StatelessWidget {
           value: false,
           onChanged: (value) {},
         ),
-        title: Text(todo.name),
+        title: Text(task.name),
       ),
     );
   }

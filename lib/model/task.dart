@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'todo.freezed.dart';
+part 'task.freezed.dart';
 
 @freezed
-abstract class Todo with _$Todo {
-  const factory Todo({
+abstract class Task with _$Task {
+  const factory Task({
     @required String id,
     @required String name,
-  }) = _Todo;
+  }) = _Task;
 }

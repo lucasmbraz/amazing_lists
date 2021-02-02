@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class AddTodoListDialog extends StatefulWidget {
-  final OnAddTodoListCallback callback;
+class AddProjectDialog extends StatefulWidget {
+  final OnAddProjectCallback callback;
 
-  const AddTodoListDialog(this.callback);
+  const AddProjectDialog(this.callback);
 
   @override
-  _AddTodoListDialogState createState() => _AddTodoListDialogState();
+  _AddProjectDialogState createState() => _AddProjectDialogState();
 }
 
-class _AddTodoListDialogState extends State<AddTodoListDialog> {
-  String listName;
+class _AddProjectDialogState extends State<AddProjectDialog> {
+  String projectName;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _AddTodoListDialogState extends State<AddTodoListDialog> {
             child: const Text('ADD'),
             onPressed: () {
               Navigator.pop(context);
-              widget.callback(listName);
+              widget.callback(projectName);
             })
       ],
     );
@@ -45,9 +45,9 @@ class _AddTodoListDialogState extends State<AddTodoListDialog> {
 
   _handleTextChanged(String newListName) {
     setState(() {
-      listName = newListName;
+      projectName = newListName;
     });
   }
 }
 
-typedef OnAddTodoListCallback = Function(String listName);
+typedef OnAddProjectCallback = Function(String projectName);

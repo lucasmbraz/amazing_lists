@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:amazing_lists/add_todo_list/add_todo_list_dialog.dart';
+import 'package:amazing_lists/add_project/add_project_dialog.dart';
 import 'package:mockito/mockito.dart';
 
 class MockAddCallback extends Mock {
@@ -8,16 +8,16 @@ class MockAddCallback extends Mock {
 }
 
 void main() {
-  OnAddTodoListCallback addCallback;
-  AddTodoListDialog dialog;
+  OnAddProjectCallback addCallback;
+  AddProjectDialog dialog;
 
   setUp(() {
     addCallback = MockAddCallback();
-    dialog = AddTodoListDialog(addCallback);
+    dialog = AddProjectDialog(addCallback);
   });
 
   testWidgets(
-      'GIVEN AddTodoListDialog is displayed '
+      'GIVEN AddProjectDialog is displayed '
       'WHEN user taps "cancel" '
       'THEN nothing happens', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: dialog)));
@@ -28,7 +28,7 @@ void main() {
   });
 
   testWidgets(
-      'GIVEN AddTodoListDialog is displayed '
+      'GIVEN AddProjectDialog is displayed '
       'WHEN user types in a list name '
       'AND taps "add" '
       'THEN the callback is called', (WidgetTester tester) async {

@@ -15,6 +15,7 @@ class ProjectsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: true,
       itemCount: projects.length,
       separatorBuilder: (context, index) => const Divider(),
       itemBuilder: (context, index) => ProjectItemWidget(

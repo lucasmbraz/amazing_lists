@@ -22,7 +22,10 @@ class TaskItemWidget extends StatelessWidget {
           value: task.complete,
           onChanged: (_) => onTapCallback(task),
         ),
-        title: Text(task.name),
+        title: Text(
+          task.name,
+          style: task.complete ? const TextStyle(decoration: TextDecoration.lineThrough) : const TextStyle(),
+        ),
         onTap: () => onTapCallback(task),
       ),
     );

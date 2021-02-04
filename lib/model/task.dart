@@ -7,5 +7,6 @@ abstract class Task with _$Task {
   const factory Task({
     @required String id,
     @required String name,
+    @required bool complete,
   }) = _Task;
 }

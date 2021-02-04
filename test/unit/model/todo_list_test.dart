@@ -11,10 +11,10 @@ void main() {
     final expectedTodoList = Project(
       id: '1',
       name: 'Groceries',
-      tasks: [Task(id: '1', name: 'Apples')],
+      tasks: [Task(id: '1', name: 'Apples', complete: false)],
     );
 
-    final actualTodoList = oldTodoList.addTodo(Task(id: '1', name: 'Apples'));
+    final actualTodoList = oldTodoList.addTodo(Task(id: '1', name: 'Apples', complete: false));
 
     expect(actualTodoList, expectedTodoList);
     // Change is non-mutating

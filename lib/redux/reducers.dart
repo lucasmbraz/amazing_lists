@@ -7,6 +7,7 @@ final appReducer = combineReducers<AppState>([
   TypedReducer<AppState, AddProjectAction>(_onAddProject),
   TypedReducer<AppState, DeleteProjectAction>(_onDeleteProject),
   TypedReducer<AppState, AddTaskAction>(_onAddTask),
+  TypedReducer<AppState, ToggleTaskCompleteAction>(_onToggleTaskComplete),
 ]);
 
 AppState _onAddProject(AppState state, AddProjectAction action) => state.copyWith(
@@ -24,6 +25,30 @@ AppState _onAddTask(AppState state, AddTaskAction action) {
 
   final updatedProject = action.project.addTodo(action.task);
   projects.insert(index, updatedProject);
+
+  return state.copyWith(
+    projects: projects,
+  );
+}
+
+AppState _onToggleTaskComplete(AppState state, ToggleTaskCompleteAction action) {
+  final projects = [...state.projects];
+  final project = projects.firstWhere((p) => p.id == action.projectId);
+  final projectIndex = projects.indexOf(project);
+
+  final tasks = [...project.tasks];
+  final task = tasks.firstWhere((t) => t.id == action.taskId);
+  final newTask = task.copyWith(complete: !task.complete);
+
+  final taskIndex = tasks.indexOf(task);
+  tasks
+    ..removeAt(taskIndex)
+    ..insert(taskIndex, newTask);
+
+  final newProject = project.copyWith(tasks: tasks);
+  projects
+    ..removeAt(projectIndex)
+    ..insert(projectIndex, newProject);
 
   return state.copyWith(
     projects: projects,

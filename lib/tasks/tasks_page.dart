@@ -1,5 +1,7 @@
 import 'package:amazing_lists/model/project.dart';
+import 'package:amazing_lists/redux/actions.dart';
 import 'package:amazing_lists/redux/app_state.dart';
+import 'package:amazing_lists/tasks/task_item_widget.dart';
 import 'package:amazing_lists/tasks/tasks_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -23,6 +25,7 @@ class TasksPage extends StatelessWidget {
         ),
         body: TasksWidget(
           tasks: vm.project.tasks,
+          onTapCallback: vm.onTapTaskCallback,
         ),
       ),
     );
@@ -30,9 +33,16 @@ class TasksPage extends StatelessWidget {
 }
 
 class _ViewModel {
-  _ViewModel(this.project);
+  _ViewModel(
+    this.project, {
+    @required this.onTapTaskCallback,
+  });
 
   final Project project;
+  final OnTapTaskCallback onTapTaskCallback;
 
-  static _ViewModel from(Store<AppState> store, String projectId) => _ViewModel(store.state.projects.firstWhere((project) => project.id == projectId));
+  static _ViewModel from(Store<AppState> store, String projectId) => _ViewModel(
+        store.state.projects.firstWhere((project) => project.id == projectId),
+        onTapTaskCallback: (task) => store.dispatch(ToggleTaskCompleteAction(projectId: projectId, taskId: task.id)),
+      );
 }

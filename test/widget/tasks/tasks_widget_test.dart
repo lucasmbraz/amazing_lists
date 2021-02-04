@@ -10,7 +10,7 @@ class MockTapCallback extends Mock {
 }
 
 void main() {
-  final tasks = [Task(id: '1', name: 'Apples'), Task(id: '2', name: 'Oranges')];
+  final tasks = [Task(id: '1', name: 'Apples', complete: false), Task(id: '2', name: 'Oranges', complete: false)];
   OnTapTaskCallback callback;
   TasksWidget widget;
 

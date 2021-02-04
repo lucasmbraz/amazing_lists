@@ -1,5 +1,5 @@
-import 'package:amazing_lists/model/task.dart';
 import 'package:amazing_lists/model/project.dart';
+import 'package:amazing_lists/model/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'app_state.freezed.dart';
@@ -14,7 +14,7 @@ abstract class AppState implements _$AppState {
 
   factory AppState.init() => AppState(
         projects: [
-          Project(id: '1', name: 'List #1', tasks: [Task(id: '1', name: 'Apples'), Task(id: '2', name: 'Oranges')]),
+          Project(id: '1', name: 'List #1', tasks: [Task(id: '1', name: 'Apples', complete: false), Task(id: '2', name: 'Oranges', complete: false)]),
           Project(id: '2', name: 'List #2', tasks: []),
           Project(id: '3', name: 'List #3', tasks: []),
           Project(id: '4', name: 'List #4', tasks: []),

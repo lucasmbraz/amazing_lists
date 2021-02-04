@@ -18,8 +18,9 @@ class TaskItemWidget extends StatelessWidget {
       child: ListTile(
         leading: CircularCheckBox(
           inactiveColor: Theme.of(context).primaryColor,
-          value: false,
-          onChanged: (value) {},
+          activeColor: Theme.of(context).primaryColor,
+          value: task.complete,
+          onChanged: (_) => onTapCallback(task),
         ),
         title: Text(task.name),
         onTap: () => onTapCallback(task),

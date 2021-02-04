@@ -27,6 +27,11 @@ class TasksPage extends StatelessWidget {
           tasks: vm.project.tasks,
           onTapCallback: vm.onTapTaskCallback,
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          onPressed: () => {},
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

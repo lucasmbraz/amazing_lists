@@ -10,48 +10,30 @@ final appReducer = combineReducers<AppState>([
   TypedReducer<AppState, ToggleTaskCompleteAction>(_onToggleTaskComplete),
 ]);
 
-AppState _onAddProject(AppState state, AddProjectAction action) => state.copyWith(
-      projects: [...state.projects]..add(action.project),
-    );
+AppState _onAddProject(AppState state, AddProjectAction action) {
+  final projects = {...state.projects};
+  projects[action.project.id] = action.project;
+
+  return state.copyWith(projects: projects);
+}
 
 AppState _onDeleteProject(AppState state, DeleteProjectAction action) => state.copyWith(
-      projects: [...state.projects]..remove(action.project),
+      projects: {...state.projects}..remove(action.project.id),
     );
 
 AppState _onAddTask(AppState state, AddTaskAction action) {
-  final projects = [...state.projects];
-  final project = projects.firstWhere((p) => p.id == action.projectId);
-  final index = projects.indexOf(project);
-  projects.removeAt(index);
+  final tasks = {...state.tasks};
+  tasks[action.task.id] = action.task;
 
-  final updatedProject = project.addTodo(action.task);
-  projects.insert(index, updatedProject);
-
-  return state.copyWith(
-    projects: projects,
-  );
+  return state.copyWith(tasks: tasks);
 }
 
 AppState _onToggleTaskComplete(AppState state, ToggleTaskCompleteAction action) {
-  final projects = [...state.projects];
-  final project = projects.firstWhere((p) => p.id == action.projectId);
-  final projectIndex = projects.indexOf(project);
+  final tasks = {...state.tasks};
+  final task = tasks[action.taskId];
 
-  final tasks = [...project.tasks];
-  final task = tasks.firstWhere((t) => t.id == action.taskId);
-  final newTask = task.copyWith(complete: !task.complete);
+  final updatedTask = task.copyWith(complete: !task.complete);
+  tasks[updatedTask.id] = updatedTask;
 
-  final taskIndex = tasks.indexOf(task);
-  tasks
-    ..removeAt(taskIndex)
-    ..insert(taskIndex, newTask);
-
-  final newProject = project.copyWith(tasks: tasks);
-  projects
-    ..removeAt(projectIndex)
-    ..insert(projectIndex, newProject);
-
-  return state.copyWith(
-    projects: projects,
-  );
+  return state.copyWith(tasks: tasks);
 }

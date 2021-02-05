@@ -15,7 +15,10 @@ void main() {
   ProjectsWidget widget;
 
   setUp(() {
-    todoLists = [Project(id: '1', name: 'Groceries', tasks: []), Project(id: '2', name: 'Shopping', tasks: [])];
+    todoLists = [
+      Project(id: '1', name: 'Groceries'),
+      Project(id: '2', name: 'Shopping'),
+    ];
     tapCallback = MockTapCallback();
     widget = ProjectsWidget(
       projects: todoLists,
@@ -38,6 +41,6 @@ void main() {
 
     await tester.tap(find.text('Shopping'));
 
-    verify(tapCallback.call(Project(id: '2', name: 'Shopping', tasks: [])));
+    verify(tapCallback.call(Project(id: '2', name: 'Shopping')));
   });
 }

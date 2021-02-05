@@ -55,8 +55,8 @@ class HomePage extends StatelessWidget {
 }
 
 class _ViewModel {
-  _ViewModel(
-    this.projects, {
+  _ViewModel({
+    @required this.projects,
     @required this.onAddProjectCallback,
     @required this.onTapProjectCallback,
   });
@@ -66,8 +66,8 @@ class _ViewModel {
   final OnTapProjectCallback onTapProjectCallback;
 
   static _ViewModel from(BuildContext context, Store<AppState> store, Uuid uuid) => _ViewModel(
-        store.state.projects,
-        onAddProjectCallback: (projectName) => store.dispatch(AddProjectAction(Project(id: uuid.v4(), name: projectName, tasks: []))),
+        projects: store.state.projects.values.toList(),
+        onAddProjectCallback: (projectName) => store.dispatch(AddProjectAction(Project(id: uuid.v4(), name: projectName))),
         onTapProjectCallback: (project) => Navigator.push(
           context,
           MaterialPageRoute(

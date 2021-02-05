@@ -11,9 +11,10 @@ void main() {
         'GIVEN app state is empty '
         'WHEN add project action is called '
         'THEN app state has one project', () {
-      final oldState = AppState(projects: []);
-      final action = AddProjectAction(Project(id: '1', name: 'Groceries', tasks: []));
-      final expectedState = AppState(projects: [Project(id: '1', name: 'Groceries', tasks: [])]);
+      final project = Project(id: '1', name: 'Groceries');
+      final oldState = AppState(projects: {}, tasks: {});
+      final action = AddProjectAction(project);
+      final expectedState = AppState(projects: {'1': project}, tasks: {});
 
       final actualState = appReducer(oldState, action);
 
@@ -24,9 +25,10 @@ void main() {
         'GIVEN app state has one project '
         'WHEN delete project action is called '
         'THEN app state is empty', () {
-      final oldState = AppState(projects: [Project(id: '1', name: 'Groceries', tasks: [])]);
-      final action = DeleteProjectAction(Project(id: '1', name: 'Groceries', tasks: []));
-      final expectedState = AppState(projects: []);
+      final project = Project(id: '1', name: 'Groceries');
+      final oldState = AppState(projects: {'1': project}, tasks: {});
+      final action = DeleteProjectAction(project);
+      final expectedState = AppState(projects: {}, tasks: {});
 
       final actualState = appReducer(oldState, action);
 
@@ -39,15 +41,14 @@ void main() {
         'GIVEN app state has one empty project '
         'WHEN add task action is called '
         'THEN the project has one task ', () {
-      final oldState = AppState(projects: [Project(id: '1', name: 'Groceries', tasks: [])]);
-      final action = AddTaskAction(projectId: '1', task: Task(id: '1', name: 'Apples', complete: false));
-      final expectedState = AppState(projects: [
-        Project(
-          id: '1',
-          name: 'Groceries',
-          tasks: [Task(id: '1', name: 'Apples', complete: false)],
-        )
-      ]);
+      final project = Project(id: '1', name: 'Groceries');
+      final task = Task(id: '1', name: 'Apples', complete: false, projectId: '1');
+      final oldState = AppState(projects: {'1': project}, tasks: {});
+      final action = AddTaskAction(task);
+      final expectedState = AppState(
+        projects: {'1': project},
+        tasks: {'1': task},
+      );
 
       final actualState = appReducer(oldState, action);
 
@@ -58,18 +59,17 @@ void main() {
         'GIVEN app state has one task '
         'WHEN toggle complete action is called '
         'THEN the task is complete ', () {
-      final task = Task(id: '1', name: 'Apples', complete: false);
-      final oldState = AppState(projects: [
-        Project(id: '1', name: 'Groceries', tasks: [task])
-      ]);
-      final action = ToggleTaskCompleteAction(projectId: '1', taskId: '1');
-      final expectedState = AppState(projects: [
-        Project(
-          id: '1',
-          name: 'Groceries',
-          tasks: [Task(id: '1', name: 'Apples', complete: true)],
-        )
-      ]);
+      final project = Project(id: '1', name: 'Groceries');
+      final task = Task(id: '1', name: 'Apples', complete: false, projectId: '1');
+      final oldState = AppState(
+        projects: {'1': project},
+        tasks: {'1': task},
+      );
+      final action = ToggleTaskCompleteAction(taskId: '1');
+      final expectedState = AppState(
+        projects: {'1': project},
+        tasks: {'1': Task(id: '1', name: 'Apples', complete: true, projectId: '1')},
+      );
 
       final actualState = appReducer(oldState, action);
 

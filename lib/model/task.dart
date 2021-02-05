@@ -8,5 +8,6 @@ abstract class Task with _$Task {
     @required String id,
     @required String name,
     @required bool complete,
+    @required String projectId,
   }) = _Task;
 }

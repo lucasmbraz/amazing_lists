@@ -15,7 +15,7 @@ main() {
   TaskItemWidget widget;
 
   setUp(() {
-    task = Task(id: '1', name: 'Apples', complete: false);
+    task = Task(id: '1', name: 'Apples', complete: false, projectId: '1');
     callback = MockTapCallback();
     widget = TaskItemWidget(task: task, onTapCallback: callback);
   });
@@ -63,7 +63,7 @@ main() {
       'GIVEN task is complete '
       'WHEN TaskItemWidget is displayed '
       'THEN checkbox is checked ', (WidgetTester tester) async {
-    task = Task(id: '1', name: 'Apples', complete: true);
+    task = Task(id: '1', name: 'Apples', complete: true, projectId: '1');
     widget = TaskItemWidget(task: task, onTapCallback: callback);
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: widget)));
 

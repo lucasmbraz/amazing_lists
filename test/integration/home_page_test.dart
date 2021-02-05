@@ -13,10 +13,13 @@ main() {
       'GIVEN app state has two lists ("Groceries" and "Shopping") '
       'WHEN home page is displayed '
       'THEN it shows both lists', (WidgetTester tester) async {
-    final appState = AppState(projects: [
-      Project(id: '1', name: 'Groceries', tasks: []),
-      Project(id: '2', name: 'Shopping', tasks: []),
-    ]);
+    final appState = AppState(
+      projects: {
+        '1': Project(id: '1', name: 'Groceries'),
+        '2': Project(id: '2', name: 'Shopping'),
+      },
+      tasks: {},
+    );
 
     final store = Store<AppState>(
       appReducer,
@@ -38,10 +41,13 @@ main() {
       'WHEN home page is displayed '
       'AND user taps "Groceries" '
       'THEN todos page is displayed for "Groceries"', (WidgetTester tester) async {
-    final appState = AppState(projects: [
-      Project(id: '1', name: 'Groceries', tasks: []),
-      Project(id: '2', name: 'Shopping', tasks: []),
-    ]);
+    final appState = AppState(
+      projects: {
+        '1': Project(id: '1', name: 'Groceries'),
+        '2': Project(id: '2', name: 'Shopping'),
+      },
+      tasks: {},
+    );
 
     final store = Store<AppState>(
       appReducer,
@@ -100,9 +106,12 @@ main() {
       'AND user types in "Shopping" '
       'AND user taps "add" '
       'THEN "Shopping" is now in the list', (WidgetTester tester) async {
-    final appState = AppState(projects: [
-      Project(id: '1', name: 'Groceries', tasks: []),
-    ]);
+    final appState = AppState(
+      projects: {
+        '1': Project(id: '1', name: 'Groceries'),
+      },
+      tasks: {},
+    );
 
     final store = Store<AppState>(
       appReducer,

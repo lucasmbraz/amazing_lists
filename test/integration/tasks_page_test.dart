@@ -9,15 +9,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:redux/redux.dart';
 
 void main() {
-  final tasks = [Task(id: '1', name: 'Apples', complete: false), Task(id: '2', name: 'Oranges', complete: false)];
-  final project = Project(id: '1', name: 'Groceries', tasks: tasks);
+  final projects = {'1': Project(id: '1', name: 'Groceries')};
+  final tasks = {
+    '1': Task(id: '1', name: 'Apples', complete: false, projectId: '1'),
+    '2': Task(id: '2', name: 'Oranges', complete: false, projectId: '1'),
+  };
 
   testWidgets(
       'GIVEN app state has a project with two tasks '
       'WHEN TasksPage is displayed '
       'THEN it shows the project name '
       'AND it shows all the tasks', (WidgetTester tester) async {
-    final appState = AppState(projects: [project]);
+    final appState = AppState(
+      projects: projects,
+      tasks: tasks,
+    );
 
     final store = Store<AppState>(
       appReducer,
@@ -40,7 +46,10 @@ void main() {
       'AND TasksPage is displayed '
       'WHEN task is tapped '
       'THEN the task is now complete', (WidgetTester tester) async {
-    final appState = AppState(projects: [project]);
+    final appState = AppState(
+      projects: projects,
+      tasks: tasks,
+    );
 
     final store = Store<AppState>(
       appReducer,
@@ -55,7 +64,7 @@ void main() {
 
     await tester.tap(find.text('Apples'));
 
-    expect(store.state.projects.first.tasks.first.complete, true);
+    expect(store.state.tasks['1'].complete, true);
   });
 
   testWidgets(
@@ -65,12 +74,10 @@ void main() {
       'AND user types in "Strawberries" '
       'AND user taps "Add" '
       'THEN "Strawberries" is now in the list', (WidgetTester tester) async {
-    final appState = AppState(projects: [
-      Project(id: '1', name: 'Groceries', tasks: [
-        Task(id: '1', name: 'Apples', complete: false),
-        Task(id: '2', name: 'Oranges', complete: false),
-      ]),
-    ]);
+    final appState = AppState(
+      projects: projects,
+      tasks: tasks,
+    );
 
     final store = Store<AppState>(
       appReducer,
@@ -80,7 +87,9 @@ void main() {
     await tester.pumpWidget(StoreProvider(
         store: store,
         child: MaterialApp(
-          home: TasksPage(projectId: '1',),
+          home: TasksPage(
+            projectId: '1',
+          ),
         )));
 
     var strawberriesFinder = find.text('Strawberries');

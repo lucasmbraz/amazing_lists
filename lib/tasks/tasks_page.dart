@@ -29,7 +29,7 @@ class TasksPage extends StatelessWidget {
           title: Text(vm.project.name),
         ),
         body: TasksWidget(
-          tasks: vm.project.tasks,
+          tasks: vm.tasks,
           onTapCallback: vm.onTapTaskCallback,
         ),
         floatingActionButton: FloatingActionButton(
@@ -50,20 +50,22 @@ class TasksPage extends StatelessWidget {
 }
 
 class _ViewModel {
-  _ViewModel(
-    this.project, {
+  _ViewModel({
+    @required this.project,
+    @required this.tasks,
     @required this.onAddTaskCallback,
     @required this.onTapTaskCallback,
   });
 
   final Project project;
+  final List<Task> tasks;
   final OnAddTaskCallback onAddTaskCallback;
   final OnTapTaskCallback onTapTaskCallback;
 
   static _ViewModel from(Store<AppState> store, Uuid uuid, String projectId) => _ViewModel(
-        store.state.projects.firstWhere((project) => project.id == projectId),
-        onAddTaskCallback: (taskName) =>
-            store.dispatch(AddTaskAction(projectId: projectId, task: Task(id: uuid.v4(), name: taskName, complete: false))),
-        onTapTaskCallback: (task) => store.dispatch(ToggleTaskCompleteAction(projectId: projectId, taskId: task.id)),
+        project: store.state.projects[projectId],
+        tasks: store.state.tasks.values.where((task) => task.projectId == projectId).toList(),
+        onAddTaskCallback: (taskName) => store.dispatch(AddTaskAction(Task(id: uuid.v4(), name: taskName, complete: false, projectId: projectId))),
+        onTapTaskCallback: (task) => store.dispatch(ToggleTaskCompleteAction(taskId: task.id)),
       );
 }

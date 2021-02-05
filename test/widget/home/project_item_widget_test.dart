@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:amazing_lists/home/project_item_widget.dart';
 import 'package:amazing_lists/model/project.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class MockTapCallback extends Mock {
@@ -9,17 +9,17 @@ class MockTapCallback extends Mock {
 }
 
 void main() {
-  Project todoList;
+  Project project;
   OnTapProjectCallback callback;
   ProjectItemWidget widget;
 
   setUp(() {
-    todoList = Project(id: '1', name: 'Groceries', tasks: []);
+    project = Project(id: '1', name: 'Groceries');
     callback = MockTapCallback();
-    widget = ProjectItemWidget(project: todoList, onTapCallback: callback);
+    widget = ProjectItemWidget(project: project, onTapCallback: callback);
   });
 
-  testWidgets('ProjectItemWidget shows a list name', (WidgetTester tester) async {
+  testWidgets('ProjectItemWidget shows a project name', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: widget)));
 
     final nameFinder = find.text('Groceries');
@@ -32,6 +32,6 @@ void main() {
 
     await tester.tap(find.text('Groceries'));
 
-    verify(callback.call(Project(id: '1', name: 'Groceries', tasks: [])));
+    verify(callback.call(Project(id: '1', name: 'Groceries')));
   });
 }

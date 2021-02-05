@@ -15,15 +15,13 @@ class DeleteProjectAction {
 }
 
 class AddTaskAction {
-  final String projectId;
   final Task task;
 
-  AddTaskAction({@required this.projectId, @required this.task});
+  AddTaskAction(this.task);
 }
 
 class ToggleTaskCompleteAction {
-  final String projectId;
   final String taskId;
 
-  ToggleTaskCompleteAction({@required this.projectId, @required this.taskId});
+  ToggleTaskCompleteAction({@required this.taskId});
 }

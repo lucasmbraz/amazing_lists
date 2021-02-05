@@ -20,10 +20,11 @@ AppState _onDeleteProject(AppState state, DeleteProjectAction action) => state.c
 
 AppState _onAddTask(AppState state, AddTaskAction action) {
   final projects = [...state.projects];
-  final index = projects.indexOf(action.project);
+  final project = projects.firstWhere((p) => p.id == action.projectId);
+  final index = projects.indexOf(project);
   projects.removeAt(index);
 
-  final updatedProject = action.project.addTodo(action.task);
+  final updatedProject = project.addTodo(action.task);
   projects.insert(index, updatedProject);
 
   return state.copyWith(

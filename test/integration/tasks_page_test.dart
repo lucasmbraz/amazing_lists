@@ -57,4 +57,42 @@ void main() {
 
     expect(store.state.projects.first.tasks.first.complete, true);
   });
+
+  testWidgets(
+      'GIVEN app state has one project ("Groceries") with two tasks ("Apples", "Oranges") '
+      'WHEN tasks page is displayed '
+      'AND user taps the add button '
+      'AND user types in "Strawberries" '
+      'AND user taps "Add" '
+      'THEN "Strawberries" is now in the list', (WidgetTester tester) async {
+    final appState = AppState(projects: [
+      Project(id: '1', name: 'Groceries', tasks: [
+        Task(id: '1', name: 'Apples', complete: false),
+        Task(id: '2', name: 'Oranges', complete: false),
+      ]),
+    ]);
+
+    final store = Store<AppState>(
+      appReducer,
+      initialState: appState,
+    );
+
+    await tester.pumpWidget(StoreProvider(
+        store: store,
+        child: MaterialApp(
+          home: TasksPage(projectId: '1',),
+        )));
+
+    var strawberriesFinder = find.text('Strawberries');
+    expect(strawberriesFinder, findsNothing);
+
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pump();
+
+    await tester.enterText(find.byType(TextField), 'Strawberries');
+    await tester.tap(find.text('ADD'));
+    await tester.pumpAndSettle();
+
+    expect(strawberriesFinder, findsOneWidget);
+  });
 }

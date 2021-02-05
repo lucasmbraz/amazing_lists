@@ -40,7 +40,7 @@ void main() {
         'WHEN add task action is called '
         'THEN the project has one task ', () {
       final oldState = AppState(projects: [Project(id: '1', name: 'Groceries', tasks: [])]);
-      final action = AddTaskAction(Project(id: '1', name: 'Groceries', tasks: []), Task(id: '1', name: 'Apples', complete: false));
+      final action = AddTaskAction(projectId: '1', task: Task(id: '1', name: 'Apples', complete: false));
       final expectedState = AppState(projects: [
         Project(
           id: '1',

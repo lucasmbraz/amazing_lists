@@ -1,4 +1,5 @@
 import 'package:amazing_lists/redux/actions.dart';
+import 'package:amazing_lists/utils/extensions.dart';
 import 'package:redux/redux.dart';
 
 import 'app_state.dart';
@@ -10,30 +11,21 @@ final appReducer = combineReducers<AppState>([
   TypedReducer<AppState, ToggleTaskCompleteAction>(_onToggleTaskComplete),
 ]);
 
-AppState _onAddProject(AppState state, AddProjectAction action) {
-  final projects = {...state.projects};
-  projects[action.project.id] = action.project;
-
-  return state.copyWith(projects: projects);
-}
+AppState _onAddProject(AppState state, AddProjectAction action) => state.copyWith(
+      projects: state.projects.insertOrUpdate(action.project.id, action.project),
+    );
 
 AppState _onDeleteProject(AppState state, DeleteProjectAction action) => state.copyWith(
       projects: {...state.projects}..remove(action.project.id),
     );
 
-AppState _onAddTask(AppState state, AddTaskAction action) {
-  final tasks = {...state.tasks};
-  tasks[action.task.id] = action.task;
-
-  return state.copyWith(tasks: tasks);
-}
+AppState _onAddTask(AppState state, AddTaskAction action) => state.copyWith(
+      tasks: state.tasks.insertOrUpdate(action.task.id, action.task),
+    );
 
 AppState _onToggleTaskComplete(AppState state, ToggleTaskCompleteAction action) {
-  final tasks = {...state.tasks};
-  final task = tasks[action.taskId];
-
+  final task = state.tasks[action.taskId];
   final updatedTask = task.copyWith(complete: !task.complete);
-  tasks[updatedTask.id] = updatedTask;
 
-  return state.copyWith(tasks: tasks);
+  return state.copyWith(tasks: state.tasks.insertOrUpdate(updatedTask.id, updatedTask));
 }
